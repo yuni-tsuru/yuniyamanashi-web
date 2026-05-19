@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>株式会社yuni 山梨都留再生工場</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--color-text-primary);
+            background: var(--color-background-primary);
+        }
+
+        a {
+            color: #2d8f5d;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #1d5a3d;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, #2d8f5d 0%, #1d5a3d 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            letter-spacing: -0.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            font-size: 0.95rem;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(45, 143, 93, 0.1) 0%, rgba(29, 90, 61, 0.05) 100%);
+            padding: 4rem 0;
+            text-align: center;
+            border-bottom: 2px solid #2d8f5d;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            color: #1d5a3d;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #2d8f5d;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 6px;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #1d5a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 143, 93, 0.3);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 3rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        section h2 {
+            font-size: 2rem;
+            color: #1d5a3d;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border: 1px solid #d0e8db;
+            border-radius: 8px;
+            padding: 2rem;
+            transition: all 0.3s;
+        }
+
+        .service-card:hover {
+            border-color: #2d8f5d;
+            box-shadow: 0 8px 24px rgba(45, 143, 93, 0.15);
+            transform: translateY(-4px);
+        }
+
+        .service-card h3 {
+            color: #2d8f5d;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .service-card p {
+            color: var(--color-text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Achievements */
+        .achievements {
+            background: #f5faf8;
+            padding: 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .achievements h3 {
+            color: #1d5a3d;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .achievement-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .achievement-item {
+            background: white;
+            padding: 1.5rem;
+            border-left: 4px solid #2d8f5d;
+            border-radius: 4px;
+        }
+
+        .achievement-item strong {
+            color: #2d8f5d;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Company Info */
+        .company-info {
+            background: white;
+            border: 1px solid #d0e8db;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+
+        .info-row {
+            display: grid;
+            grid-template-columns: 150px 1fr;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            align-items: start;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-label {
+            font-weight: 600;
+            color: #2d8f5d;
+        }
+
+        /* Form Section */
+        .form-section {
+            background: #f5faf8;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .form-section h3 {
+            color: #1d5a3d;
+            margin-bottom: 2rem;
+            font-size: 1.3rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #1d5a3d;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #d0e8db;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #2d8f5d;
+            box-shadow: 0 0 0 3px rgba(45, 143, 93, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-button {
+            background: #2d8f5d;
+            color: white;
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            max-width: 300px;
+        }
+
+        .submit-button:hover {
+            background: #1d5a3d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(45, 143, 93, 0.3);
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            border-left: 4px solid #2d8f5d;
+            padding: 1rem;
+            border-radius: 4px;
+            color: #1d5a3d;
+            margin-bottom: 1.5rem;
+            display: none;
+        }
+
+        /* Footer */
+        footer {
+            background: #1d5a3d;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #7fc79d;
+        }
+
+        footer a:hover {
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            nav {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .info-row {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">株式会社 yuni</div>
+            <nav>
+                <a href="#service">事業内容</a>
+                <a href="#solution">サービス</a>
+                <a href="#achievements">実績</a>
+                <a href="#company">会社情報</a>
+                <a href="#contact">問い合わせ</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="hero">
+        <div class="container">
+            <h1>廃棄布団の再生で、循環型社会を実現</h1>
+            <p>自治体・企業・個人から廃棄される布団を回収・リサイクルし、新たな素材・製品として生まれ変わらせる。</p>
+            <button class="cta-button" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">お問い合わせ</button>
+        </div>
+    </div>
+
+    <section id="service">
+        <div class="container">
+            <h2>事業内容</h2>
+            <p style="text-align: center; color: var(--color-text-secondary); margin-bottom: 2rem; font-size: 1.05rem;">
+                廃棄布団を高温殺菌・解体・粉砕し、再素材化または新製品として製造・販売しています。<br>
+                同時に、就労支援のA型事業所としても運営しています。
+            </p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>♻️ リサイクル処理</h3>
+                    <p>高温殺菌、解体、粉砕により、廃棄布団を再素材化します。クッション、長座布団、羽毛布団などの製品化も行っています。</p>
+                </div>
+                <div class="service-card">
+                    <h3>🏭 製品製造</h3>
+                    <p>リサイクル素材を活用して、クッション、長座布団、羽毛布団など、高品質な新製品を製造・販売しています。</p>
+                </div>
+                <div class="service-card">
+                    <h3>👥 就労支援</h3>
+                    <p>A型事業所として、就労困難な方々の安定した雇用と社会参加を支援しています。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="solution">
+        <div class="container">
+            <h2>サービス詳細</h2>
+            <div class="achievements">
+                <h3>① 布団回収・リサイクル処理</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
+                    自治体・企業・個人からの廃棄布団を回収します。<br>
+                    スキームや費用等についてのご相談の上、実証実験からスタートいたします。
+                </p>
+                <div class="achievement-list">
+                    <div class="achievement-item">
+                        <strong>高温殺菌</strong>
+                        安全性を確保した処理プロセス
+                    </div>
+                    <div class="achievement-item">
+                        <strong>解体・粉砕</strong>
+                        最新設備による効率的な処理
+                    </div>
+                    <div class="achievement-item">
+                        <strong>素材化</strong>
+                        再利用可能な高品質素材の製造
+                    </div>
+                </div>
+            </div>
+
+            <div class="achievements">
+                <h3>② 製品・素材販売</h3>
+                <p style="margin-bottom: 1.5rem; color: var(--color-text-secondary);">
+                    リサイクル素材および製品をお客様のニーズに合わせて販売いたします。<br>
+                    素材表や料金表など、詳細情報はお気軽にお問い合わせください。
+                </p>
+                <div class="achievement-list">
+                    <div class="achievement-item">
+                        <strong>クッション素材</strong>
+                        高品質でコスト効率的
+                    </div>
+                    <div class="achievement-item">
+                        <strong>長座布団</strong>
+                        快適性と耐久性を兼ねた製品
+                    </div>
+                    <div class="achievement-item">
+                        <strong>羽毛布団</strong>
+                        ふっくらとした温かさを実現
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="achievements">
+        <div class="container">
+            <h2>実績</h2>
+            <div class="achievement-list">
+                <div class="achievement-item">
+                    <strong>🤝 回収事業での協業自治体</strong>
+                    <p>山梨県南アルプス市、東京都葛飾区</p>
+                </div>
+                <div class="achievement-item">
+                    <strong>🔬 実証実験実施自治体</strong>
+                    <p>神奈川県厚木市、千葉県四街道市 ほか</p>
+                </div>
+                <div class="achievement-item">
+                    <strong>🏢 主要出荷先</strong>
+                    <p>株式会社良品計画（無印良品）、しまむらグループ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="company">
+        <div class="container">
+            <h2>会社情報</h2>
+            <div class="company-info">
+                <div class="info-row">
+                    <div class="info-label">会社名</div>
+                    <div>株式会社 yuni</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">事業所名</div>
+                    <div>山梨都留再生工場</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">所在地</div>
+                    <div>山梨県都留市つる2－2－3</div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">メール</div>
+                    <div><a href="mailto:yamanashi-tsuru-factory@yuni.co.jp">yamanashi-tsuru-factory@yuni.co.jp</a></div>
+                </div>
+                <div class="info-row">
+                    <div class="info-label">関連サイト</div>
+                    <div>
+                        <a href="https://www.yuni.co.jp" target="_blank">本社サイト（yuni.co.jp）</a><br>
+                        <a href="https://www.susteb.life" target="_blank">susteb.life</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <h2>お問い合わせ</h2>
+            <p style="text-align: center; color: var(--color-text-secondary); margin-bottom: 2rem;">
+                ご不明な点やご相談がありましたら、以下のフォームからお気軽にお問い合わせください。<br>
+                回収スキーム、費用、製品・素材についてなど、お気軽にご連絡ください。
+            </p>
+            <div class="form-section">
+                <div class="success-message" id="successMessage">
+                    ✓ お問い合わせありがとうございます。<br>
+                    お送りいただいた内容を確認後、メールでご連絡させていただきます。
+                </div>
+                <form id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">お名前 <span style="color: #d32f2f;">*</span></label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="company">法人名（法人の場合）</label>
+                            <input type="text" id="company" name="company">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">電話番号 <span style="color: #d32f2f;">*</span></label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">メールアドレス <span style="color: #d32f2f;">*</span></label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inquiry">お問い合わせ内容 <span style="color: #d32f2f;">*</span></label>
+                        <select id="inquiry" name="inquiry" required>
+                            <option value="">-- 選択してください --</option>
+                            <option value="collection">布団回収について</option>
+                            <option value="product">製品・素材について</option>
+                            <option value="trial">実証実験について</option>
+                            <option value="other">その他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">詳細・備考</label>
+                        <textarea id="message" name="message" placeholder="ご不明な点やご相談内容をお書きください..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-button">送信</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 株式会社 yuni 山梨都留再生工場 | All rights reserved.</p>
+        <p style="margin-top: 1rem; font-size: 0.85rem;">
+            本社サイト: <a href="https://www.yuni.co.jp" target="_blank">yuni.co.jp</a> | <a href="https://www.susteb.life" target="_blank">susteb.life</a>
+        </p>
+    </footer>
+
+    <script>
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            // フォームデータを取得
+            const formData = {
+                name: document.getElementById('name').value,
+                company: document.getElementById('company').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                inquiry: document.getElementById('inquiry').value,
+                message: document.getElementById('message').value
+            };
+
+            // メール送信の代わりに成功メッセージを表示
+            console.log('Form submitted:', formData);
+            
+            // 成功メッセージを表示
+            successMessage.style.display = 'block';
+            form.style.display = 'none';
+
+            // フォームをリセット
+            form.reset();
+
+            // 3秒後にフォームを再度表示
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+                form.style.display = 'block';
+            }, 3000);
+
+            // 実際の実装では、以下のようにサーバーにメール送信を依頼します
+            // fetch('/send-email', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //     },
+            //     body: JSON.stringify(formData)
+            // });
+        });
+    </script>
+</body>
+</html>
