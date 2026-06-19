@@ -6,6 +6,14 @@
     <title>株式会社yuni 山梨都留再生工場</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 写真の横幅をコンテンツ幅に合わせ、はみ出さないようにする */
+.contact-image {
+  display: block;
+  max-width: 100%;    /* 親要素からはみ出さない */
+  height: auto;       /* 縦横比を維持 */
+  margin: 0 auto 2rem; /* 中央寄せにして下に余白を作る */
+  border-radius: 8px; /* 好みで角を少し丸くする */
+}
         * {
             margin: 0;
             padding: 0;
