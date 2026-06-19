@@ -557,6 +557,7 @@
                     お送りいただいた内容を確認後、メールでご連絡させていただきます。
                 </div>
                 <form id="contactForm">
+                    <form id="contactForm" action="https://formspree.io/f/xjgdqzag" method="POST">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">お名前 <span style="color: #d32f2f;">*</span></label>
@@ -605,50 +606,45 @@
     </footer>
 
     <script>
-       const form = document.getElementById('contactForm');
+const form = document.getElementById('contactForm');
 const successMessage = document.getElementById('successMessage');
 
 form.addEventListener('submit', function(e) {
   e.preventDefault();
 
-  // フォームデータを取得
-  const formData = {
-    name: document.getElementById('name').value,
-    company: document.getElementById('company').value,
-    phone: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    inquiry: document.getElementById('inquiry').value,
-    message: document.getElementById('message').value,
-    _to: 'shirasu.kazuma@yuni.co.jp' // 送信先メールアドレスを指定
-  };
-
-  // サーバーへメール送信を依頼（バックエンドのAPIエンドポイントに送信）
-  fetch('/send-email', {
-    method: 'POST',
+  // Formspreeへフォームデータを送信
+  fetch(form.action, {
+    method: form.method,
+    body: new FormData(form),
     headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(formData)
+      'Accept': 'application/json'
+    }
   })
   .then(response => {
     if (response.ok) {
-      // 成功メッセージを表示
+      // 成功メッセージを表示し、フォームを隠す
       successMessage.style.display = 'block';
       form.style.display = 'none';
       form.reset();
 
-      // 3秒後にフォームを再度表示
+      // 3秒後にメッセージを隠し、フォームを再表示
       setTimeout(() => {
         successMessage.style.display = 'none';
         form.style.display = 'block';
       }, 3000);
     } else {
-      alert('送信に失敗しました。時間をおいて再度お試しください。');
+      response.json().then(data => {
+        if (Object.hasOwn(data, 'errors')) {
+          alert(data["errors"].map(error => error["message"]).join(", "));
+        } else {
+          alert('送信に失敗しました。入力内容を確認してください。');
+        }
+      })
     }
   })
   .catch(error => {
     console.error('Error:', error);
-    alert('通信エラーが発生しました。');
+    alert('通信エラーが発生しました。インターネット接続を確認してください。');
   });
 });
     </script>
