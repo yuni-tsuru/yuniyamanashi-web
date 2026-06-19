@@ -349,20 +349,67 @@
                 padding: 2rem 0;
             }
         }
-    </style>
+   /* プルダウンメニュー全体のスタイル */
+.dropdown-menu {
+  position: relative;
+  display: inline-block;
+}
+
+/* メニューの引き金となるボタン（PC/スマホ共通） */
+.menu-trigger {
+  background-color: var(--color-primary, #333); /* 必要に応じて色を調整してください */
+  color: white;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* プルダウンの中身（初期状態は非表示） */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0; /* 右端に合わせる（左側にしたい場合は left: 0; ） */
+  background-color: #ffffff;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 100;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/* プルダウン内のリンクのスタイル */
+.dropdown-content a {
+  color: #333 !important;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+/* リンクをホバーした時の背景色変更 */
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+/* メニュー全体にホバーした時にプルダウンを表示 */
+.dropdown-menu:hover .dropdown-content {
+  display: block;
+} </style>
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo">株式会社 yuni</div>
-            <nav>
-                <a href="#service">事業内容</a>
-                <a href="#solution">サービス</a>
-                <a href="#achievements">実績</a>
-                <a href="#company">会社情報</a>
-                <a href="#contact">問い合わせ</a>
-            </nav>
-        </div>
+<nav class="dropdown-menu">
+  <div class="menu-trigger">メニュー ▾</div>
+  <div class="dropdown-content">
+    <a href="#service">事業内容</a>
+    <a href="#solution">サービス</a>
+    <a href="#achievements">実績</a>
+    <a href="#company">会社情報</a>
+    <a href="#contact">問い合わせ</a>
+  </div>
+</nav>
     </header>
 
     <div class="hero">
