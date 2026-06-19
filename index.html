@@ -605,47 +605,52 @@
     </footer>
 
     <script>
-        const form = document.getElementById('contactForm');
-        const successMessage = document.getElementById('successMessage');
+       const form = document.getElementById('contactForm');
+const successMessage = document.getElementById('successMessage');
 
-        form.addEventListener('submit', function(e) {
-            e.preventDefault();
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
 
-            // フォームデータを取得
-            const formData = {
-                name: document.getElementById('name').value,
-                company: document.getElementById('company').value,
-                phone: document.getElementById('phone').value,
-                email: document.getElementById('email').value,
-                inquiry: document.getElementById('inquiry').value,
-                message: document.getElementById('message').value
-            };
+  // フォームデータを取得
+  const formData = {
+    name: document.getElementById('name').value,
+    company: document.getElementById('company').value,
+    phone: document.getElementById('phone').value,
+    email: document.getElementById('email').value,
+    inquiry: document.getElementById('inquiry').value,
+    message: document.getElementById('message').value,
+    _to: 'shirasu.kazuma@yuni.co.jp' // 送信先メールアドレスを指定
+  };
 
-            // メール送信の代わりに成功メッセージを表示
-            console.log('Form submitted:', formData);
-            
-            // 成功メッセージを表示
-            successMessage.style.display = 'block';
-            form.style.display = 'none';
+  // サーバーへメール送信を依頼（バックエンドのAPIエンドポイントに送信）
+  fetch('/send-email', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(formData)
+  })
+  .then(response => {
+    if (response.ok) {
+      // 成功メッセージを表示
+      successMessage.style.display = 'block';
+      form.style.display = 'none';
+      form.reset();
 
-            // フォームをリセット
-            form.reset();
-
-            // 3秒後にフォームを再度表示
-            setTimeout(() => {
-                successMessage.style.display = 'none';
-                form.style.display = 'block';
-            }, 3000);
-
-            // 実際の実装では、以下のようにサーバーにメール送信を依頼します
-            // fetch('/send-email', {
-            //     method: 'POST',
-            //     headers: {
-            //         'Content-Type': 'application/json',
-            //     },
-            //     body: JSON.stringify(formData)
-            // });
-        });
+      // 3秒後にフォームを再度表示
+      setTimeout(() => {
+        successMessage.style.display = 'none';
+        form.style.display = 'block';
+      }, 3000);
+    } else {
+      alert('送信に失敗しました。時間をおいて再度お試しください。');
+    }
+  })
+  .catch(error => {
+    console.error('Error:', error);
+    alert('通信エラーが発生しました。');
+  });
+});
     </script>
 </body>
 </html>
