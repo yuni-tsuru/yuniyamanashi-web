@@ -556,45 +556,43 @@
                     ✓ お問い合わせありがとうございます。<br>
                     お送りいただいた内容を確認後、メールでご連絡させていただきます。
                 </div>
-    <form id="contactForm">
-
-    <form id="contactForm" action="https://formspree.io/f/xjgdqzag" method="POST">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="name">お名前 <span style="color: #d32f2f;">*</span></label>
-                            <input type="text" id="name" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="company">法人名（法人の場合）</label>
-                            <input type="text" id="company" name="company">
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="phone">電話番号 <span style="color: #d32f2f;">*</span></label>
-                            <input type="tel" id="phone" name="phone" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">メールアドレス <span style="color: #d32f2f;">*</span></label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="inquiry">お問い合わせ内容 <span style="color: #d32f2f;">*</span></label>
-                        <select id="inquiry" name="inquiry" required>
-                            <option value="">-- 選択してください --</option>
-                            <option value="collection">布団回収について</option>
-                            <option value="product">製品・素材について</option>
-                            <option value="trial">実証実験について</option>
-                            <option value="other">その他</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">詳細・備考</label>
-                        <textarea id="message" name="message" placeholder="ご不明な点やご相談内容をお書きください..."></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">送信</button>
-                </form>
+<form action="mailto:yamanashi-tsuru-factory@yuni.co.jp" method="GET" enctype="text/plain">
+  <div class="form-row">
+    <div class="form-group">
+      <label for="name">お名前 <span style="color: #d32f2f;">*</span></label>
+      <input type="text" id="name" name="名前" required>
+    </div>
+    <div class="form-group">
+      <label for="company">法人名（法人の場合）</label>
+      <input type="text" id="company" name="法人名">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="form-group">
+      <label for="phone">電話番号 <span style="color: #d32f2f;">*</span></label>
+      <input type="tel" id="phone" name="電話番号" required>
+    </div>
+    <div class="form-group">
+      <label for="email">メールアドレス <span style="color: #d32f2f;">*</span></label>
+      <input type="email" id="email" name="返信用メールアドレス" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="inquiry">お問い合わせ内容 <span style="color: #d32f2f;">*</span></label>
+    <select id="inquiry" name="お問い合わせ内容" required>
+      <option value="">-- 選択してください --</option>
+      <option value="布団回収について">布団回収について</option>
+      <option value="製品・素材について">製品・素材について</option>
+      <option value="実証実験について">実証実験について</option>
+      <option value="その他">その他</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="message">詳細・備考</label>
+    <textarea id="message" name="詳細・備考" placeholder="ご不明な点やご相談内容をお書きください..."></textarea>
+  </div>
+  <button type="submit" class="submit-button">メールアプリを起動して送信</button>
+</form>
             </div>
         </div>
     </section>
@@ -606,48 +604,5 @@
         </p>
     </footer>
 
-    <script>
-const form = document.getElementById('contactForm');
-const successMessage = document.getElementById('successMessage');
-
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  // Formspreeへフォームデータを送信
-  fetch(form.action, {
-    method: form.method,
-    body: new FormData(form),
-    headers: {
-      'Accept': 'application/json'
-    }
-  })
-  .then(response => {
-    if (response.ok) {
-      // 成功メッセージを表示し、フォームを隠す
-      successMessage.style.display = 'block';
-      form.style.display = 'none';
-      form.reset();
-
-      // 3秒後にメッセージを隠し、フォームを再表示
-      setTimeout(() => {
-        successMessage.style.display = 'none';
-        form.style.display = 'block';
-      }, 3000);
-    } else {
-      response.json().then(data => {
-        if (Object.hasOwn(data, 'errors')) {
-          alert(data["errors"].map(error => error["message"]).join(", "));
-        } else {
-          alert('送信に失敗しました。入力内容を確認してください。');
-        }
-      })
-    }
-  })
-  .catch(error => {
-    console.error('Error:', error);
-    alert('通信エラーが発生しました。インターネット接続を確認してください。');
-  });
-});
-    </script>
 </body>
 </html>
